@@ -129,6 +129,11 @@ unique across departments, so grouping by `job_title` alone lets the covering in
 `(country, job_title, current_salary_cents)` answer the query as an **index-only scan with 0 heap fetches
 (1.2 ms)**, shown above. The department is derived from the title in Ruby.
 
+## Through the Docker stack
+
+Measured end to end through nginx → production Rails → Postgres/Redis containers (including local network hops):
+`/insights/by_country` took **81 ms** uncached and **16 ms** from Redis.
+
 ## Guardrails in the test suite
 
 - **Bullet raises in tests:** any N+1 fails the spec that caused it.

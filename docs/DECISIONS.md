@@ -171,4 +171,9 @@ Each index serves a specific query; unused indexes only slow down writes.
   and an error handler: Redis being down means cache misses, not failed requests. Tests use `:memory_store`
   so the suite needs no Redis server.
 - **Bullet** raises in tests: an N+1 fails the spec that caused it.
+- **Docker:** multi-stage production images. The API is non-root, uses jemalloc and has a health check; the SPA is served
+  by nginx, which also reverse-proxies `/api`, so the browser sees one origin and CORS is unnecessary. `docker compose up`
+  is the one-command path for reviewers. The entrypoint runs `db:prepare`, then `db:seed_if_empty`, so the first boot
+  seeds and restarts never wipe data. `FORCE_SSL` defaults to on and is turned off only for local plain-HTTP runs.
+  Kubernetes/Helm was deliberately not added, as it would be overkill for a single-service app.
 - **Removed unused frameworks** (Action Mailer/Cable/Text, Active Storage, Active Job). Less surface area, faster boot.

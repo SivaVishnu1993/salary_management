@@ -17,6 +17,9 @@ test:
   <<: *default
   database: salary_management_test
 
+# Production takes everything from DATABASE_URL (no local defaults inherited).
 production:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   url: <%= ENV["DATABASE_URL"] %>

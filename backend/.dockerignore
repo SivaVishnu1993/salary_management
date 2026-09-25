@@ -1,0 +1,15 @@
+# Keep the build context (and the image) free of secrets, VCS data and local artifacts.
+/.git
+/.bundle
+/log/*
+!/log/.keep
+/tmp/*
+!/tmp/.keep
+/coverage
+/spec
+/config/master.key
+/config/credentials/*.key
+/.rspec
+/.rubocop.yml
+Dockerfile
+.dockerignore

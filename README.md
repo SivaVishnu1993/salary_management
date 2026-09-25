@@ -28,9 +28,38 @@ answer questions about how the organisation pays people. It replaces a set of sp
 |---|---|
 | API | Ruby 3.4, Rails 8.1 (API-only), PostgreSQL 16 (`pg_trgm`), Redis (cache), JWT auth |
 | UI | React 19 + TypeScript (strict), Vite, MUI 9 (DataGrid, Charts), TanStack Query, React Router |
+| Delivery | Docker (multi-stage production images), docker compose, nginx (serves the SPA, proxies `/api`) |
 | Quality | RSpec (256 examples, 100% line and branch coverage, 90% gate), FactoryBot, shoulda-matchers, Bullet (N+1 → failure), RuboCop (0 offenses), Brakeman (0 warnings), ESLint `strictTypeChecked`, Prettier |
 
-## Quick start
+## Quick start with Docker (recommended)
+
+Only Docker is required.
+
+```bash
+docker compose up --build
+```
+
+Open **http://localhost:8080** and sign in with `hr@acme.test` / `password123`.
+
+- **First boot** migrates the database and seeds 10,000 employees (about a minute including image builds).
+  Later boots keep your data.
+- **Services:**
+  - `web`: nginx serving the SPA and proxying `/api`
+  - `api`: production Rails image, non-root, with a health check
+  - `db`: Postgres 16
+  - `redis`
+- **Reset to fresh demo data:** `docker compose down -v && docker compose up`
+- **Change the port:** `WEB_PORT=9000 docker compose up`
+- **Secrets:** the compose file ships demo-only defaults. Override `SECRET_KEY_BASE`, `JWT_SECRET`,
+  `POSTGRES_PASSWORD` and `SEED_ADMIN_PASSWORD` in a `.env` file for anything shared.
+
+> These are **production images** (`RAILS_ENV=production`, compiled SPA, no dev or test gems or specs), used here to
+> run the finished app with one command. For development (hot reload, running RSpec or RuboCop), use the setup below.
+
+The same images deploy to any container host. `backend/Dockerfile` needs `DATABASE_URL`, `SECRET_KEY_BASE`,
+`JWT_SECRET` and optionally `REDIS_URL`. SSL is enforced unless `FORCE_SSL=false`.
+
+## Quick start without Docker
 
 Prerequisites: Ruby 3.4.5, Node 20+, PostgreSQL 16 (with `postgresql-contrib` for `pg_trgm`), Redis 6+.
 
@@ -63,6 +92,8 @@ npm run dev              # proxies /api to localhost:3000
 | `SEED_EMPLOYEES` | `10000` | Seed size |
 | `SEED_ADMIN_EMAIL` / `SEED_ADMIN_PASSWORD` | `hr@acme.test` / `password123` | Seeded HR login |
 | `VITE_API_URL` (frontend) | `/api/v1` | API base URL for a separately hosted SPA |
+| `FORCE_SSL` | `true` | Production only: set `false` to serve plain HTTP (local Docker) |
+| `SEED_IF_EMPTY` | – | Container entrypoint: seed demo data on first boot only |
 
 ## Tests & quality checks
 
@@ -105,13 +136,17 @@ Errors always use `{ "error": { "code", "message", "details"? } }` (401 / 404 / 
 ## Repository layout
 
 ```
-backend/    Rails API: app/{controllers,queries,services,serializers,models,validators}, lib/seeds, spec/
-frontend/   React SPA: src/{app,lib,types,hooks,components,features/*}
-docs/       requirements, architecture, decisions, performance, AI prompts
+backend/             Rails API: app/{controllers,queries,services,serializers,models,validators}, lib/seeds, spec/
+  Dockerfile         production image (multi-stage, non-root, health check)
+  bin/docker-entrypoint   db:prepare + seed-on-first-boot, then the server
+frontend/            React SPA: src/{app,lib,types,hooks,components,features/*}
+  Dockerfile         build with Node, serve with nginx
+  nginx.conf.template     SPA fallback, asset caching, /api reverse proxy
+docker-compose.yml   db + redis + api + web for one-command local runs
+docs/                requirements, architecture, decisions, performance, AI prompts
 ```
 
 ## Not yet done
 
-- **Deployment:** the hosting target is still to be decided. The app is 12-factor configured (env vars above), and the
-  SPA builds to static files (`npm run build` → `frontend/dist`).
+- **Deployment:** the hosting target is still to be decided. The Docker images above run on any container host.
 - **Demo video:** to be recorded against the seeded dataset.

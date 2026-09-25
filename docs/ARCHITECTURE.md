@@ -16,6 +16,30 @@ flowchart LR
 - In development, Vite proxies `/api` to Rails, so the SPA and API share an origin. In production CORS
   is restricted to `CORS_ORIGINS`.
 
+## Deployment (Docker)
+
+```mermaid
+flowchart LR
+  B["Browser"] -->|":8080"| W["web<br/>nginx: SPA + /api proxy"]
+  W -->|"/api → :3000"| A["api<br/>Rails production image<br/>(non-root, jemalloc)"]
+  A --> D[("db<br/>postgres:16 · volume pgdata")]
+  A --> R[("redis<br/>LRU, 128 MB")]
+```
+
+- **Two production images:**
+  - `backend/Dockerfile`: multi-stage, so build tools never reach the final image.
+  - `frontend/Dockerfile`: builds with Node, then serves static files with nginx.
+- **nginx gives one origin:** the browser only talks to `web`, which proxies `/api` to `api`. No CORS setup is
+  needed, and the API isn't exposed to the host at all.
+  - Deep links fall back to `index.html`.
+  - Fingerprinted `/assets` are cached for a year, while `index.html` is never cached.
+- **Boot order by health checks:** `db` and `redis` become healthy, then `api` (`/up`), then `web`.
+- **Entrypoint:** `db:prepare`, then `db:seed_if_empty`. The first boot loads the 10k demo dataset, and restarts never wipe data.
+- **Config by environment:** `DATABASE_URL`, `REDIS_URL`, `SECRET_KEY_BASE`, `JWT_SECRET`.
+  - SSL is enforced by default (`FORCE_SSL`), for hosts that terminate TLS at a proxy.
+  - The compose file disables it for `http://localhost`.
+- **Scope:** these images run the finished app. Development stays native (hot reload, RSpec, RuboCop); see the README.
+
 ## Request lifecycle (backend)
 
 ```mermaid

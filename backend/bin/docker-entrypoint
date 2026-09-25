@@ -1,0 +1,18 @@
+#!/bin/bash -e
+
+# jemalloc lowers Ruby's memory use and fragmentation in long-running processes.
+if [ -z "${LD_PRELOAD+x}" ]; then
+  LD_PRELOAD=$(find /usr/lib -name libjemalloc.so.2 -print -quit)
+  export LD_PRELOAD
+fi
+
+# Before starting the server: create/migrate the database, and optionally load
+# demo data on first boot (SEED_IF_EMPTY=1; never re-seeds existing data).
+if [ "$1" == "./bin/rails" ] && [ "$2" == "server" ]; then
+  ./bin/rails db:prepare
+  if [ "${SEED_IF_EMPTY}" == "1" ]; then
+    ./bin/rails db:seed_if_empty
+  fi
+fi
+
+exec "$@"
