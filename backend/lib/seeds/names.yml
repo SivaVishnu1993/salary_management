@@ -1,0 +1,25 @@
+# Name pools per country for realistic, reproducible demo data.
+US:
+  first: [James, Mary, Robert, Patricia, John, Jennifer, Michael, Linda, David, Elizabeth, William, Barbara, Richard, Susan, Joseph, Jessica, Thomas, Sarah, Chris, Karen, Daniel, Emily, Matthew, Ashley]
+  last: [Smith, Johnson, Williams, Brown, Jones, Garcia, Miller, Davis, Rodriguez, Martinez, Hernandez, Lopez, Wilson, Anderson, Thomas, Taylor, Moore, Jackson, Martin, Lee, Thompson, White, Harris, Clark]
+IN:
+  first: [Aarav, Priya, Vihaan, Ananya, Arjun, Diya, Rohan, Isha, Karan, Kavya, Aditya, Meera, Rahul, Sneha, Vikram, Pooja, Siddharth, Neha, Amit, Riya, Nikhil, Aisha, Varun, Lakshmi]
+  last: [Sharma, Patel, Iyer, Reddy, Nair, Gupta, Singh, Kumar, Menon, Rao, Joshi, Mehta, Bose, Das, Pillai, Chopra, Verma, Agarwal, Kulkarni, Desai]
+GB:
+  first: [Oliver, Amelia, George, Isla, Harry, Ava, Jack, Mia, Charlie, Grace, Thomas, Sophie, Oscar, Lily, William, Freya, Henry, Emily, Alfie, Poppy]
+  last: [Smith, Jones, Taylor, Brown, Williams, Wilson, Evans, Thomas, Roberts, Walker, Wright, Hughes, Edwards, Green, Hall, Wood, Harris, Clarke, Turner, Hill]
+DE:
+  first: [Lukas, Hannah, Leon, Emma, Finn, Mia, Jonas, Lena, Paul, Lea, Felix, Anna, Maximilian, Laura, Elias, Sophie, Noah, Marie, Ben, Julia]
+  last: [Müller, Schmidt, Schneider, Fischer, Weber, Meyer, Wagner, Becker, Schulz, Hoffmann, Koch, Richter, Klein, Wolf, Schröder, Neumann, Schwarz, Braun, Zimmermann, Krüger]
+CA:
+  first: [Liam, Olivia, Noah, Emma, Ethan, Charlotte, Lucas, Ava, Benjamin, Chloe, Logan, Sophia, Owen, Abigail, Jacob, Zoe, Nathan, Madison, Samuel, Hannah]
+  last: [Tremblay, Martin, Roy, Gagnon, Lee, Wilson, Johnson, MacDonald, Taylor, Campbell, Anderson, Leblanc, Cote, Bouchard, Morin, Scott, Stewart, Young, Clark, Fraser]
+BR:
+  first: [Miguel, Alice, Arthur, Helena, Gael, Laura, Heitor, Valentina, Theo, Sophia, Davi, Manuela, Bernardo, Julia, Gabriel, Beatriz, Pedro, Lorena, Rafael, Isabela]
+  last: [Silva, Santos, Oliveira, Souza, Rodrigues, Ferreira, Alves, Pereira, Lima, Gomes, Costa, Ribeiro, Martins, Carvalho, Almeida, Lopes, Araújo, Barbosa, Rocha, Dias]
+AU:
+  first: [Jack, Charlotte, William, Olivia, Oliver, Amelia, Noah, Isla, Thomas, Mia, James, Ava, Lucas, Grace, Henry, Chloe, Ethan, Ruby, Harrison, Matilda]
+  last: [Smith, Jones, Williams, Brown, Wilson, Taylor, Johnson, White, Martin, Anderson, Thompson, Nguyen, Thomas, Walker, Harris, Lee, Ryan, Robinson, Kelly, King]
+SG:
+  first: [Wei Ling, Jun Jie, Hui Min, Zhi Hao, Mei Ling, Kai Wen, Xin Yi, Jia Hui, Ravi, Siti, Ahmad, Nur, Daniel, Rachel, Marcus, Sarah, Ethan, Chloe, Ryan, Megan]
+  last: [Tan, Lim, Lee, Ng, Ong, Wong, Goh, Chua, Chan, Koh, Teo, Ang, Yeo, Tay, Ho, Low, Toh, Sim, Chong, Kumar]

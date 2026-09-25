@@ -1,0 +1,42 @@
+source "https://rubygems.org"
+
+gem "rails", "~> 8.1.4"
+gem "pg", "~> 1.1"
+gem "puma", ">= 5.0"
+gem "bootsnap", require: false
+gem "tzinfo-data", platforms: %i[ windows jruby ]
+
+# Authentication: has_secure_password + stateless JWT access tokens
+gem "bcrypt", "~> 3.1.7"
+gem "jwt", "~> 2.10"
+
+# Redis-backed Rails.cache for insight aggregates (see docs/DECISIONS.md)
+gem "redis", "~> 5.4"
+
+# Lightweight, fast offset pagination (wrapped by the Paginatable concern)
+gem "pagy", "~> 9.3"
+
+# Cross-origin requests from the Vite dev server / separately hosted SPA
+gem "rack-cors"
+
+group :development, :test do
+  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+  gem "bundler-audit", require: false
+  gem "brakeman", require: false
+
+  gem "rspec-rails", "~> 8.0"
+  gem "factory_bot_rails"
+  # N+1 detection; raises in the test suite
+  gem "bullet"
+
+  gem "rubocop-rails-omakase", require: false
+  gem "rubocop-rspec", require: false
+  gem "rubocop-rspec_rails", require: false
+  gem "rubocop-performance", require: false
+  gem "rubocop-factory_bot", require: false
+end
+
+group :test do
+  gem "shoulda-matchers", "~> 6.0"
+  gem "simplecov", require: false
+end

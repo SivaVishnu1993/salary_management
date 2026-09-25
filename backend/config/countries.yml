@@ -1,0 +1,9 @@
+# Supported countries. The country determines the pay currency (ISO 4217).
+US: { name: United States, currency: USD }
+GB: { name: United Kingdom, currency: GBP }
+DE: { name: Germany, currency: EUR }
+IN: { name: India, currency: INR }
+CA: { name: Canada, currency: CAD }
+AU: { name: Australia, currency: AUD }
+SG: { name: Singapore, currency: SGD }
+BR: { name: Brazil, currency: BRL }

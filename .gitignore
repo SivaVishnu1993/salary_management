@@ -1,0 +1,10 @@
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Environment files (commit *.example only)
+.env
+.env.*
+!.env.example

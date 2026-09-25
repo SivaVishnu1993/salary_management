@@ -1,0 +1,7 @@
+en:
+  errors:
+    messages:
+      currency_mismatch: "must be %{expected} for this country"
+      in_future: "can't be in the future"
+      not_in_department: "is not a job title in %{department}"
+      implausibly_large: "is above the %{limit} (USD) sanity limit. Check for extra zeros"

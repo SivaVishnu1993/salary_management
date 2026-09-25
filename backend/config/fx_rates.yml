@@ -1,0 +1,14 @@
+# Static, versioned FX table used to compare pay across countries in USD.
+# Deliberately not live (see docs/REQUIREMENTS.md): analytics stay deterministic.
+# Bump `version` whenever rates change so cached USD aggregates are invalidated.
+version: 1
+as_of: 2026-01-01
+usd_per_unit:
+  USD: 1.0
+  GBP: 1.27
+  EUR: 1.08
+  INR: 0.012
+  CAD: 0.73
+  AUD: 0.66
+  SGD: 0.74
+  BRL: 0.18

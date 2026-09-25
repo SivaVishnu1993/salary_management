@@ -1,0 +1,51 @@
+# Departments and their job ladders. Job titles are a closed list so that pay
+# statistics group cleanly ("Sr. Engineer" vs "Senior Engineer" drift is one of
+# the spreadsheet problems we are replacing). Level 1 = entry, 5 = director.
+Engineering:
+  - { title: Software Engineer I, level: 1 }
+  - { title: Software Engineer II, level: 2 }
+  - { title: Senior Software Engineer, level: 3 }
+  - { title: Staff Software Engineer, level: 4 }
+  - { title: Director of Engineering, level: 5 }
+Product:
+  - { title: Associate Product Manager, level: 1 }
+  - { title: Product Manager, level: 2 }
+  - { title: Senior Product Manager, level: 3 }
+  - { title: Group Product Manager, level: 4 }
+  - { title: Director of Product, level: 5 }
+Design:
+  - { title: Product Designer I, level: 1 }
+  - { title: Product Designer II, level: 2 }
+  - { title: Senior Product Designer, level: 3 }
+  - { title: Lead Product Designer, level: 4 }
+  - { title: Director of Design, level: 5 }
+Sales:
+  - { title: Sales Development Representative, level: 1 }
+  - { title: Account Executive, level: 2 }
+  - { title: Senior Account Executive, level: 3 }
+  - { title: Sales Manager, level: 4 }
+  - { title: Director of Sales, level: 5 }
+Marketing:
+  - { title: Marketing Coordinator, level: 1 }
+  - { title: Marketing Specialist, level: 2 }
+  - { title: Marketing Manager, level: 3 }
+  - { title: Senior Marketing Manager, level: 4 }
+  - { title: Director of Marketing, level: 5 }
+Finance:
+  - { title: Finance Associate, level: 1 }
+  - { title: Financial Analyst, level: 2 }
+  - { title: Senior Financial Analyst, level: 3 }
+  - { title: Finance Manager, level: 4 }
+  - { title: Director of Finance, level: 5 }
+HR:
+  - { title: HR Coordinator, level: 1 }
+  - { title: HR Generalist, level: 2 }
+  - { title: HR Business Partner, level: 3 }
+  - { title: HR Manager, level: 4 }
+  - { title: Director of People, level: 5 }
+Operations:
+  - { title: Operations Associate, level: 1 }
+  - { title: Operations Analyst, level: 2 }
+  - { title: Senior Operations Analyst, level: 3 }
+  - { title: Operations Manager, level: 4 }
+  - { title: Director of Operations, level: 5 }

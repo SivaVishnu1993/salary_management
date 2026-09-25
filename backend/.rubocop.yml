@@ -1,0 +1,36 @@
+# Omakase (Rails' house style) as the base, plus RSpec / performance / FactoryBot
+# plugins. Every relaxed cop below carries a reason; there is no .rubocop_todo.yml.
+inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+
+plugins:
+  - rubocop-performance
+  - rubocop-rspec
+  - rubocop-rspec_rails
+  - rubocop-factory_bot
+
+AllCops:
+  TargetRubyVersion: 3.4
+  NewCops: enable
+  Exclude:
+    - "bin/**/*"
+    - "vendor/**/*"
+    - "db/schema.rb"
+    - "tmp/**/*"
+    - "log/**/*"
+
+# Request specs naturally assert several facets (status, body, side effects) of one call.
+RSpec/MultipleExpectations:
+  Max: 5
+
+# Request/service specs need a little more room than unit specs for setup + assertions.
+RSpec/ExampleLength:
+  Max: 15
+  CountAsOne: ["array", "hash", "heredoc", "method_call"]
+
+# Contexts like "when authenticated" > "with invalid params" read better one level deeper.
+RSpec/NestedGroups:
+  Max: 4
+
+# Our specs build small, explicit datasets; a few named lets beat hidden helpers.
+RSpec/MultipleMemoizedHelpers:
+  Max: 8

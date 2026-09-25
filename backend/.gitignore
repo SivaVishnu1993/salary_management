@@ -1,0 +1,15 @@
+/.bundle
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+/tmp/pids/*
+!/tmp/pids/.keep
+
+# Secrets
+/config/master.key
+/config/credentials/*.key
+
+# Test artifacts
+/coverage/
+/spec/examples.txt
